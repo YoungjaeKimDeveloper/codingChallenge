@@ -9,3 +9,6 @@ console.log(data);
 function formatCurrency(targetValue) {
   return `$${value.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
 }
+function formatPercentage(targetValue) {
+  return `${(targetValue * 100).toFixed(1)}%`;
+}
