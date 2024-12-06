@@ -71,3 +71,21 @@ function calculateGrossProfitMargin(items, revenue) {
     throw new Error(`ERROR in Calculating Expense: ${error.message}`);
   }
 }
+
+function calculateNetProfitMargin(expenses, revenue) {
+  try {
+    if (
+      expenses === undefined ||
+      expenses === null ||
+      revenue === undefined ||
+      revenue === null
+    ) {
+      throw new Error("ERROR IN calculateNetProfitMargin function");
+    }
+    return (revenue - expenses) / revenue;
+  } catch (error) {
+    throw new Error(
+      `ERROR in calculateNetProfitMargin function: ${error.message}`
+    );
+  }
+}

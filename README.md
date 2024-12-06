@@ -65,6 +65,7 @@ This metric is calculated by subtracting the `expenses` value from the `revenue`
 This is calculated dividing the `assets` by the `liabilities` creating a percentage value where `assets` are calculated by:
 
 - adding the `total_value` from all records where the `account_category` is set to `assets`, the `value_type` is set to `debit`, and the `account_type` is one of `current`, `bank`, or `current_accounts_receivable`
+
 - subtracting the `total_value` from all records where the `account_category` is set to `assets`, the `value_type` is set to `credit`, and the `account_type` is one of `current`, `bank`, or `current_accounts_receivable`
 
 and liabilities are calculated by:
