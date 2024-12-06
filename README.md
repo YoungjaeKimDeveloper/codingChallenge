@@ -1,5 +1,31 @@
 # RewardPay Coding Challenge
 
+# Personal Info
+
+Name: Youngjae Kim
+Email: 2015fromjeki@gmail.com
+Date: 06/12/2024
+
+## Overview
+
+This project calculates five common accounting metrics (Revenue, Expenses, Gross Profit Margin, Net Profit Margin, and Working Capital Ratio) based on a provided dataset in `data.json`. The program performs parsing of the data, calculates the metrics, and prints the results.
+
+## Technologies Used
+
+- JavaScript (Node.js)
+
+## Usage
+
+The program reads the data from `data.json` and calculates the following metrics:
+
+1. **Revenue**: The sum of all values where `account_category` is `revenue`.
+2. **Expenses**: The sum of all values where `account_category` is `expense`.
+3. **Gross Profit Margin**: Calculated by summing sales `debit` values and dividing by revenue.
+4. **Net Profit Margin**: Calculated by subtracting expenses from revenue and dividing by revenue.
+5. **Working Capital Ratio**: Calculated by dividing assets by liabilities.
+
+# RewardPay Coding Challenge
+
 ## Overview
 
 This repo contains the instructions and the data you need to complete the _RewardPay coding challenge_. This challenge is not intended to be complex, but it is an opportunity for you to showcase your understanding and applying of good development practices.
