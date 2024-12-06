@@ -53,3 +53,20 @@ function calculateExpense(items) {
     throw new Error(`ERROR in Calculating Expense: ${error.message}`);
   }
 }
+
+function calculateGrossProfitMargin(items) {
+  try {
+    if (items === null || items === undefined) {
+      throw new Error("ITEMS IS NULL");
+    }
+    return items
+      .filter(
+        (item) =>
+          item.account_category === "sales" && item.value_type === "debit"
+      )
+      .reduce((sum, item) => sum + item.total_value, 0);
+  } catch (error) {
+    throw new Error(`ERROR in Calculating Expense: ${error.message}`);
+  }
+}
+
