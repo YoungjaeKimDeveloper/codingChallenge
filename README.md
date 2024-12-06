@@ -7,8 +7,11 @@ This repo contains the instructions and the data you need to complete the _Rewar
 You are encouraged to treat this as a real-life project.  This typically means:
 
 - Use version control effectively
+
 - Include some basic documentation
+
 - Include some unit tests
+
 - Adhere to a naming convention
 
 Please use JavaScript of TypeScript to complete this challenge.
@@ -40,7 +43,7 @@ Use the formulas below to calculate your values:
 
 ### Revenue
 
-This should be calculated by adding up all the values under `total_value` where the `account_category` field is set to `revenue`
+✅ This should be calculated by adding up all the values under `total_value` where the `account_category` field is set to `revenue`
 
 ### Expenses
 
