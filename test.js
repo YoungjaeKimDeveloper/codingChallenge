@@ -1,9 +1,9 @@
 const fs = require("fs");
 
 // Read the Data
-const items = JSON.parse(fs.readFileSync("data.json"));
+const rawItems = JSON.parse(fs.readFileSync("data.json"));
+const items = rawItems.data;
 // Tester for the data
-console.log(items);
 
 // Currency foramt function
 function formatCurrency(targetValue) {
@@ -59,14 +59,15 @@ function calculateGrossProfitMargin(items, revenue) {
     if (items === null || items === undefined) {
       return "ITEMS IS NULL";
     }
+
     const sales = items
       .filter(
-        (item) =>
-          item.account_category === "sales" && item.value_type === "debit"
+        (item) => item.account_type == "sales" || item.value_type == "debit"
       )
       .reduce((sum, item) => sum + item.total_value, 0);
-
-    return revenue === 0 ? 0 : sales / revenue;
+    // console.log(revenue);
+    // console.log(sales);
+    return sales / revenue;
   } catch (error) {
     return `ERROR in Calculating Expense: ${error.message}`;
   }
@@ -89,46 +90,68 @@ function calculateNetProfitMargin(expenses, revenue) {
 }
 
 function calculateCapitalRatio(items) {
-  const assetsAdding = items
-    .filter(
-      (item) =>
-        item.account_category === "assets" &&
-        item.value_type === "debit" &&
-        (item.account_type === "current" ||
-          item.account_type === "bank" ||
-          item.account_type === "current_accounts_receivable")
-    )
-    .reduce((sum, item) => sum + item.total_value, 0);
-  const assetsSubtracting = items
-    .filter(
-      (item) =>
-        item.account_category === "assets" &&
-        item.value_type === "credit" &&
-        (item.account_type === "current" ||
-          item.account_type === "bank" ||
-          item.account_type === "current_accounts_receivable")
-    )
-    .reduce((sum, item) => sum + item.total_value, 0);
-  const assets = assetsAdding - assetsSubtracting;
-  const liabilitiesAdding = items
-    .filter(
-      (item) =>
-        item.account_category === "liability" &&
-        item.value_type === "credit" &&
-        (item.account_type === "current" ||
-          item.account_type === "current_accounts_payable")
-    )
-    .reduce((sum, item) => sum + item.total_value, 0);
-  const liabilitiesSubtracting = items
-    .filter(
-      (item) =>
-        item.account_category === "liability" &&
-        item.value_type === "debit" &&
-        (item.account_type === "current" ||
-          item.account_type === "current_accounts_payable")
-    )
-    .reduce((sum, item) => sum + item.total_value, 0);
-  const liabilities = liabilitiesAdding - liabilitiesSubtracting;
-  const capitalRatio = liabilities === 0 ? 0 : assets / liabilities;
-  return capitalRatio;
+  try {
+    if (items === null || items === undefined) {
+      return "ITEMS IS NULL";
+    }
+    const assetsAdding = items
+      .filter(
+        (item) =>
+          item.account_category === "assets" &&
+          item.value_type === "debit" &&
+          (item.account_type === "current" ||
+            item.account_type === "bank" ||
+            item.account_type === "current_accounts_receivable")
+      )
+      .reduce((sum, item) => sum + item.total_value, 0);
+    const assetsSubtracting = items
+      .filter(
+        (item) =>
+          item.account_category === "assets" &&
+          item.value_type === "credit" &&
+          (item.account_type === "current" ||
+            item.account_type === "bank" ||
+            item.account_type === "current_accounts_receivable")
+      )
+      .reduce((sum, item) => sum + item.total_value, 0);
+    const assets = assetsAdding - assetsSubtracting;
+    const liabilitiesAdding = items
+      .filter(
+        (item) =>
+          item.account_category === "liability" &&
+          item.value_type === "credit" &&
+          (item.account_type === "current" ||
+            item.account_type === "current_accounts_payable")
+      )
+      .reduce((sum, item) => sum + item.total_value, 0);
+    const liabilitiesSubtracting = items
+      .filter(
+        (item) =>
+          item.account_category === "liability" &&
+          item.value_type === "debit" &&
+          (item.account_type === "current" ||
+            item.account_type === "current_accounts_payable")
+      )
+      .reduce((sum, item) => sum + item.total_value, 0);
+    const liabilities = liabilitiesAdding - liabilitiesSubtracting;
+    const capitalRatio = liabilities === 0 ? 0 : assets / liabilities;
+    return capitalRatio;
+  } catch (error) {}
 }
+
+function test() {
+  const revenue = calculateRevenue(items);
+  const expenses = calculateExpense(items);
+  const grossProfitMargin = calculateGrossProfitMargin(items, revenue);
+  const netProfitMargin = calculateNetProfitMargin(expenses, revenue);
+  const capitalRatio = calculateCapitalRatio(items);
+
+  // Test the outputs
+  console.log("Revenue:", formatCurrency(revenue));
+  console.log("Expenses:", formatCurrency(expenses));
+  console.log("Gross Profit Margin:", formatPercentage(grossProfitMargin));
+  console.log("Net Profit Margin:", formatPercentage(netProfitMargin));
+  console.log("Working Capital Ratio:", formatPercentage(capitalRatio));
+}
+
+test();

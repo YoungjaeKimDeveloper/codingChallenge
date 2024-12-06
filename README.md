@@ -2,9 +2,9 @@
 
 ## Overview
 
-This repo contains the instructions and the data you need to complete the _RewardPay coding challenge_.  This challenge is not intended to be complex, but it is an opportunity for you to showcase your understanding and applying of good development practices.
+This repo contains the instructions and the data you need to complete the _RewardPay coding challenge_. This challenge is not intended to be complex, but it is an opportunity for you to showcase your understanding and applying of good development practices.
 
-You are encouraged to treat this as a real-life project.  This typically means:
+You are encouraged to treat this as a real-life project. This typically means:
 
 - Use version control effectively
 
@@ -51,8 +51,8 @@ This should be calculated by adding up all the values under `total_value` where 
 
 ### Gross Profit Margin
 
-This is calculated in two steps: 
-first by adding all the `total_value` fields where the `account_type` is set to `sales` and the `value_type` is set to `debit`; 
+This is calculated in two steps:
+first by adding all the `total_value` fields where the `account_type` is set to `sales` and the `value_type` is set to `debit`;
 
 then dividing that by the `revenue` value calculated earlier to generate a percentage value.
 
@@ -76,15 +76,16 @@ and liabilities are calculated by:
 ## Formatting
 
 All currency figures must be formatted as follows:
+
 - The value is prefixed with a `$` sign
 - A comma is used to separate every 3 digits in the thousands, millions, billions, and trillions
 - Cents are removed
 
-All percentage values must be formatted to one decimal digit and be prefixed with a `%` sign.  Don't forget to multiply by 100 each time you're tasked with calculating a percentage value.
+All percentage values must be formatted to one decimal digit and be prefixed with a `%` sign. Don't forget to multiply by 100 each time you're tasked with calculating a percentage value.
 
 ## Example
 
-Below is what a typical output should look like.  Please note this is *not* the output of the challenge but a mere example.
+Below is what a typical output should look like. Please note this is _not_ the output of the challenge but a mere example.
 
 ```
 $ ./myChallenge
@@ -99,4 +100,4 @@ Working Capital Ratio: 95%
 
 If your program requires a special way to compile or a specific version of a toolset, please be sure to include that in your running instructions.
 
-__Thank you and good luck!__
+**Thank you and good luck!**
