@@ -89,3 +89,48 @@ function calculateNetProfitMargin(expenses, revenue) {
     );
   }
 }
+
+function calculateCapitalRatio(items) {
+  const assetsAdding = items
+    .filter(
+      (item) =>
+        item.account_category === "assets" &&
+        item.value_type === "debit" &&
+        (item.account_type === "current" ||
+          item.account_type === "bank" ||
+          item.account_type === "current_accounts_receivable")
+    )
+    .reduce((sum, item) => sum + item.total_value, 0);
+  const assetsSubtracting = items
+    .filter(
+      (item) =>
+        item.account_category === "assets" &&
+        item.value_type === "credit" &&
+        (item.account_type === "current" ||
+          item.account_type === "bank" ||
+          item.account_type === "current_accounts_receivable")
+    )
+    .reduce((sum, item) => sum + item.total_value, 0);
+  const assets = assetsAdding - assetsSubtracting;
+  const liabilitiesAdding = items
+    .filter(
+      (item) =>
+        item.account_category === "liability" &&
+        item.value_type === "credit" &&
+        (item.account_type === "current" ||
+          item.account_type === "current_accounts_payable")
+    )
+    .reduce((sum, item) => sum + item.total_value, 0);
+  const liabilitiesSubtracting = items
+    .filter(
+      (item) =>
+        item.account_category === "liability" &&
+        item.value_type === "debit" &&
+        (item.account_type === "current" ||
+          item.account_type === "current_accounts_payable")
+    )
+    .reduce((sum, item) => sum + item.total_value, 0);
+  const liabilities = liabilitiesAdding - liabilitiesSubtracting;
+  const capitalRatio = liabilities === 0 ? 0 : assets / liabilities;
+  return capitalRatio;
+}
