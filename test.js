@@ -9,9 +9,9 @@ console.log(items);
 function formatCurrency(targetValue) {
   try {
     if (typeof targetValue !== "number") {
-      throw new Error("INVALID VALUE. PROVIDE NUMBER PLEASE");
+      return "INVALID VALUE. PROVIDE NUMBER PLEASE";
     }
-    return `$${value.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+    return `$${targetValue.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
   } catch (error) {
     return `Error in formatting Currency: ${error.message}`;
   }
@@ -24,40 +24,40 @@ function formatPercentage(targetValue) {
     }
     return `${(targetValue * 100).toFixed(1)}%`;
   } catch (error) {
-    return Error(`ERROR in formatiing Percentage: ${error.message}`);
+    return `ERROR in formatiing Percentage: ${error.message}`;
   }
 }
 // Calculation Functions
 function calculateRevenue(items) {
   try {
     if (items === null || items === undefined) {
-      throw new Error("ITEMS IS NULL");
+      return "ITEMS IS NULL";
     }
     return items
       .filter((item) => item.account_category === "revenue")
       .reduce((sum, item) => sum + item.total_value, 0);
   } catch (error) {
-    throw new Error(`ERROR in Calculating Revenue: ${error.message}`);
+    return `ERROR in Calculating Revenue: ${error.message}`;
   }
 }
 
 function calculateExpense(items) {
   try {
     if (items === null || items === undefined) {
-      throw new Error("ITEMS IS NULL");
+      return "ITEMS IS NULL";
     }
     return items
       .filter((item) => item.account_category === "expense")
       .reduce((sum, item) => sum + item.total_value, 0);
   } catch (error) {
-    throw new Error(`ERROR in Calculating Expense: ${error.message}`);
+    return `ERROR in Calculating Expense: ${error.message}`;
   }
 }
 
 function calculateGrossProfitMargin(items, revenue) {
   try {
     if (items === null || items === undefined) {
-      throw new Error("ITEMS IS NULL");
+      return "ITEMS IS NULL";
     }
     const sales = items
       .filter(
@@ -66,9 +66,9 @@ function calculateGrossProfitMargin(items, revenue) {
       )
       .reduce((sum, item) => sum + item.total_value, 0);
 
-    return sales / revenue;
+    return revenue === 0 ? 0 : sales / revenue;
   } catch (error) {
-    throw new Error(`ERROR in Calculating Expense: ${error.message}`);
+    return `ERROR in Calculating Expense: ${error.message}`;
   }
 }
 
@@ -80,13 +80,11 @@ function calculateNetProfitMargin(expenses, revenue) {
       revenue === undefined ||
       revenue === null
     ) {
-      throw new Error("ERROR IN calculateNetProfitMargin function");
+      return "ERROR IN calculateNetProfitMargin function";
     }
     return (revenue - expenses) / revenue;
   } catch (error) {
-    throw new Error(
-      `ERROR in calculateNetProfitMargin function: ${error.message}`
-    );
+    return `ERROR in calculateNetProfitMargin function: ${error.message}`;
   }
 }
 
