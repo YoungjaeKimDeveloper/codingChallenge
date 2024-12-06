@@ -51,7 +51,10 @@ This should be calculated by adding up all the values under `total_value` where 
 
 ### Gross Profit Margin
 
-This is calculated in two steps: first by adding all the `total_value` fields where the `account_type` is set to `sales` and the `value_type` is set to `debit`; then dividing that by the `revenue` value calculated earlier to generate a percentage value.
+This is calculated in two steps: 
+irst by adding all the `total_value` fields where the `account_type` is set to `sales` and the `value_type` is set to `debit`; 
+
+then dividing that by the `revenue` value calculated earlier to generate a percentage value.
 
 ### Net Profit Margin
 
